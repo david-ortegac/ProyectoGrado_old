@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8mb4" collation="utf8mb4_0900_ai_ci">proyectofinal</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="consumo_electricos" view="colnames">
+<left>703</left>
+<top>45</top>
+<width>135</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `consumo_electricos` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `dispositivo_id` bigint unsigned NOT NULL,
+  `consumo` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `consumo_electricos_dispositivo_id_foreign` (`dispositivo_id`),
+  CONSTRAINT `consumo_electricos_dispositivo_id_foreign` FOREIGN KEY (`dispositivo_id`) REFERENCES `dispositivos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="dispositivos" view="colnames">
+<left>528</left>
+<top>260</top>
+<width>151</width>
+<height>231</height>
+<sql_create_table>CREATE TABLE `dispositivos` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `tipo_dispositivo_id` bigint unsigned NOT NULL,
+  `serial` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_dispositivo` char(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'on',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `estado` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dispositivos_user_id_foreign` (`user_id`),
+  KEY `dispositivos_tipo_dispositivo_id_foreign` (`tipo_dispositivo_id`),
+  CONSTRAINT `dispositivos_tipo_dispositivo_id_foreign` FOREIGN KEY (`tipo_dispositivo_id`) REFERENCES `tipo_dispositivos` (`id`),
+  CONSTRAINT `dispositivos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="locations" view="colnames">
+<left>7</left>
+<top>9</top>
+<width>110</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `locations` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` bigint unsigned NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locations_users_id_foreign` (`users_id`),
+  CONSTRAINT `locations_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="rols" view="colnames">
+<left>368</left>
+<top>616</top>
+<width>110</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `rols` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="tipo_dispositivos" view="colnames">
+<left>703</left>
+<top>581</top>
+<width>110</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `tipo_dispositivos` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="users" view="colnames">
+<left>140</left>
+<top>277</top>
+<width>204</width>
+<height>282</height>
+<sql_create_table>CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `rols_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_photo_path` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `users_rols_id_foreign` (`rols_id`),
+  CONSTRAINT `users_rols_id_foreign` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
