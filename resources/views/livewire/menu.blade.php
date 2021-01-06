@@ -45,7 +45,8 @@
                         </li>
 
                         <!-- Perfil -->
-                        @livewire('navigation-dropdown')
+                        {{-- @livewire('navigation-dropdown') --}}
+                        @livewire('dropdown-menu')
 
                     @else
                         <ul class="nav-item">
