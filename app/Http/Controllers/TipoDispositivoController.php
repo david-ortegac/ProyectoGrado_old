@@ -14,7 +14,9 @@ class TipoDispositivoController extends Controller
      */
     public function index()
     {
-        //
+        $td = TipoDispositivo::all();
+
+        return view('dispositivos.tipoDispositivo')->with('td', $td);
     }
 
     /**
@@ -24,7 +26,7 @@ class TipoDispositivoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dispositivos.td_create');
     }
 
     /**
@@ -35,7 +37,13 @@ class TipoDispositivoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $td = new TipoDispositivo();
+        $td->nombre = $request->get('nombre');
+        $td->descripcion = $request->get('descripcion');
+        $td->save();
+
+        return redirect('/td')->with('created', 'ok');
+
     }
 
     /**
@@ -52,34 +60,46 @@ class TipoDispositivoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TipoDispositivo  $tipoDispositivo
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoDispositivo $tipoDispositivo)
+    public function edit($id)
     {
-        //
+        $td = TipoDispositivo::all()->find($id);
+
+        return view('dispositivos.td_edit')->with('td', $td);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TipoDispositivo  $tipoDispositivo
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipoDispositivo $tipoDispositivo)
+    public function update(Request $request, $id)
     {
-        //
+        $td = TipoDispositivo::find($id);
+
+        $td->nombre = $request->get('nombre');
+        $td->descripcion = $request->get('descripcion');
+        $td->save();
+
+        return redirect('/td')->with('edited', 'ok');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TipoDispositivo  $tipoDispositivo
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipoDispositivo $tipoDispositivo)
+    public function destroy($id)
     {
-        //
+        $td = TipoDispositivo::find($id);
+        $td->delete();
+
+        return redirect('/td')->with('delete', 'ok');
+
     }
 }
