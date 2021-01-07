@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TipoDispositivoController;
+use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,10 @@ Route::get('/', function () {
 
 //td Tipo dispositivo
 Route::resource('td', TipoDispositivoController::class);
+
+//Rol controller
+Route::resource('rol', RolController::class);
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

@@ -14,9 +14,12 @@ class CreateDispositivosTable extends Migration
     public function up()
     {
         Schema::create('dispositivos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('tipo_dispositivo_id')->constrained('tipo_dispositivos');
+            $table->foreignId('location_id')->constrained('locations');
             $table->string('serial');
             $table->string('nombre');
             $table->char('estado_dispositivo')->default('on');

@@ -14,6 +14,22 @@ class RolSeeder extends Seeder
      */
     public function run()
     {
-        Rol::factory(3)->create();
+        Rol::create([
+            'id' => '1',
+            'descripcion' => 'SUPERADMIN',
+        ]);
+
+        Rol::create([
+            'id' => '2',
+            'descripcion' =>'ADMINISTRADOR',
+        ]);
+
+        Rol::create([
+            'id' => '3',
+            'descripcion' => 'USUARIO',
+        ]);
+
+
+
     }
 }

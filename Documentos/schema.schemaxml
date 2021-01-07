@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemadesigner version="6.5">
 <source>
-<database charset="utf8mb4" collation="utf8mb4_0900_ai_ci">proyectofinal</database>
+<database charset="latin1" collation="latin1_swedish_ci">sintrau1_gestion</database>
 </source>
 <canvas zoom="100">
 <tables>
 <table name="consumo_electricos" view="colnames">
-<left>703</left>
-<top>45</top>
+<left>726</left>
+<top>16</top>
 <width>135</width>
 <height>129</height>
 <sql_create_table>CREATE TABLE `consumo_electricos` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `dispositivo_id` bigint unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `dispositivo_id` bigint(20) unsigned NOT NULL,
   `consumo` double NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -22,66 +22,66 @@
 ) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
 </table>
 <table name="dispositivos" view="colnames">
-<left>528</left>
-<top>260</top>
+<left>515</left>
+<top>33</top>
 <width>151</width>
 <height>231</height>
 <sql_create_table>CREATE TABLE `dispositivos` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint unsigned NOT NULL,
-  `tipo_dispositivo_id` bigint unsigned NOT NULL,
-  `serial` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado_dispositivo` char(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'on',
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `tipo_dispositivo_id` bigint(20) unsigned NOT NULL,
+  `location_id` bigint(20) unsigned NOT NULL,
+  `serial` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_dispositivo` char(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'on',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `dispositivos_user_id_foreign` (`user_id`),
   KEY `dispositivos_tipo_dispositivo_id_foreign` (`tipo_dispositivo_id`),
+  KEY `dispositivos_location_id_foreign` (`location_id`),
+  CONSTRAINT `dispositivos_location_id_foreign` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
   CONSTRAINT `dispositivos_tipo_dispositivo_id_foreign` FOREIGN KEY (`tipo_dispositivo_id`) REFERENCES `tipo_dispositivos` (`id`),
   CONSTRAINT `dispositivos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
 </table>
 <table name="locations" view="colnames">
-<left>7</left>
-<top>9</top>
+<left>382</left>
+<top>257</top>
 <width>110</width>
 <height>197</height>
 <sql_create_table>CREATE TABLE `locations` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `users_id` bigint unsigned NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `locations_users_id_foreign` (`users_id`),
-  CONSTRAINT `locations_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
 </table>
 <table name="rols" view="colnames">
-<left>368</left>
-<top>616</top>
+<left>243</left>
+<top>253</top>
 <width>110</width>
 <height>146</height>
 <sql_create_table>CREATE TABLE `rols` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
 </table>
 <table name="tipo_dispositivos" view="colnames">
-<left>703</left>
-<top>581</top>
+<left>690</left>
+<top>328</top>
 <width>110</width>
 <height>163</height>
 <sql_create_table>CREATE TABLE `tipo_dispositivos` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -89,17 +89,17 @@
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
 </table>
 <table name="users" view="colnames">
-<left>140</left>
-<top>277</top>
+<left>16</left>
+<top>50</top>
 <width>204</width>
 <height>282</height>
 <sql_create_table>CREATE TABLE `users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `rols_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `rols_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
   `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

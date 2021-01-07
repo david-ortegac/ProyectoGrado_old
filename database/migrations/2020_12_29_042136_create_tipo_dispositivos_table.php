@@ -14,6 +14,8 @@ class CreateTipoDispositivosTable extends Migration
     public function up()
     {
         Schema::create('tipo_dispositivos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->id();
             $table->string('nombre');
             $table->text('descripcion');

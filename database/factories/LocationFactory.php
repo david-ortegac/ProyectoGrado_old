@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Dispositivo;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +24,6 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            'users_id' => User::all()->random()->id,
             'nombre' => $this->faker->name,
             'descripcion' => $this->faker->sentence(),
             'estado' => $this->faker->randomElement([0,1]),

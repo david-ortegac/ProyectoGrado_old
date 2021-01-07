@@ -14,6 +14,7 @@ class CreateConsumoElectricosTable extends Migration
     public function up()
     {
         Schema::create('consumo_electricos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->foreignId('dispositivo_id')->constrained('dispositivos');
             $table->double('consumo');

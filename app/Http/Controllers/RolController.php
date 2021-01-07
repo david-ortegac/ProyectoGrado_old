@@ -14,7 +14,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
+        $rol = Rol::all();
+        return view('rol.index_rol')->with('rol', $rol);
     }
 
     /**
@@ -24,7 +25,7 @@ class RolController extends Controller
      */
     public function create()
     {
-        //
+        return view('rol.create_rol');
     }
 
     /**
@@ -35,7 +36,12 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rol = new Rol();
+        $rol->descripcion = $request->get('descripcion');
+        $rol->save();
+
+        return redirect('/rol')->with('created', 'ok');
+
     }
 
     /**
@@ -52,24 +58,30 @@ class RolController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Rol  $rol
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rol $rol)
+    public function edit($id)
     {
-        //
+        $rol = Rol::all()->find($id);
+        return view('rol.edit_rol')->with('rol', $rol);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rol  $rol
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, $id)
     {
-        //
+        $rol = Rol::find($id);
+        $rol->descripcion = $request->get('descripcion');
+        $rol->save();
+
+        return redirect('/rol')->with('edited', 'ok');
+
     }
 
     /**

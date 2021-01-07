@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Dispositivo;
+use App\Models\Location;
 use App\Models\TipoDispositivo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,6 +27,7 @@ class DispositivoFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,
             'tipo_dispositivo_id' => TipoDispositivo::all()->random()->id,
+            'location_id' => Location::all()->random()->id,
             'serial' => $this->faker->unique()->creditCardNumber(),
             'nombre' => $this->faker->name,
             'estado_dispositivo' => $this->faker->randomElement(['on', 'off']),
