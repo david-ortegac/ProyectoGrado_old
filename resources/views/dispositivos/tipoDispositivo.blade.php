@@ -42,7 +42,7 @@
     </div>
 
     @section('js')
-    
+
         @if (session('delete') == 'ok')
             <script>
                 Swal.fire(
@@ -97,8 +97,8 @@
                     }
                 })
             });
-
         </script>
+        
     @endsection
 
 </x-app-layout>

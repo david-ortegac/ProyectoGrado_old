@@ -29,7 +29,7 @@
                     timer: 5000
                 })
             }
-
         </script>
     @endsection
+
 </x-app-layout>

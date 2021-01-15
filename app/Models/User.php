@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Rol;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,6 +17,20 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasFactory;
+
+
+
+    //relacion 1 a muchos inversa
+    public function rol()
+    {
+        return $this->BelongsTo(Rol::class, 'rols_id');
+    }
+
+    public function dispositivos()
+    {
+        return $this->hasMany('App\Models\Dispositivo');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'rols_id',
         'name',
         'email',
         'password',
@@ -59,18 +74,4 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    //relacion 1 a muchos inversa
-    public function rol(){
-        return $this->belongsTo(Rol::class);
-    }
-
-
-    //relacion 1 a muchos
-    public function location(){
-        return $this->hasMany(Location::class);
-    }
-
-    public function dispositivo(){
-        return $this->hasMany(Dispositivo::class);
-    }
 }

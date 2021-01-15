@@ -9,7 +9,7 @@
 <left>726</left>
 <top>16</top>
 <width>135</width>
-<height>129</height>
+<height>145</height>
 <sql_create_table>CREATE TABLE `consumo_electricos` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `dispositivo_id` bigint(20) unsigned NOT NULL,
@@ -95,7 +95,7 @@
 <height>282</height>
 <sql_create_table>CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `rols_id` bigint(20) unsigned NOT NULL,
+  `rols_id` bigint(20) unsigned NOT NULL DEFAULT '3',
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TipoDispositivoController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ Route::resource('td', TipoDispositivoController::class);
 
 //Rol controller
 Route::resource('rol', RolController::class);
+
+//User controller
+Route::resource('user', UserController::class);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
